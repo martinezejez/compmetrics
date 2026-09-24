@@ -256,9 +256,9 @@ th,td{padding:10px 9px;}
    CONFIGURACIÓN — edita SOLO esta sección
    ===================================================================== */
 var CONFIG = {
-  URL_LOGIN:   'https://default209600103256406daa1d6108d70e1d.03.environment.api.powerplatform.com/powerautomate/automations/direct/cu/24/workflows/5d747b8585f449eb818f632d1a6b7fca/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Qs8H86qXQvZNAnLRXpxgjqmP4uwUftlPf2pC4Hr5L9I',   // Pega aquí la URL del flujo CM-Login
-  URL_GUARDAR: 'https://default209600103256406daa1d6108d70e1d.03.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/19/workflows/606484c256d24abca9f6b214dab60da9/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=RoUkW6xvncMr0YBj5lQb_Ihza34zqVpWkK5XZC9iNYE',   // Pega aquí la URL del flujo CM-Guardar
-  URL_ENVIAR:  'https://default209600103256406daa1d6108d70e1d.03.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/21/workflows/abbd7f67c2004eaab5c29d798befed40/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FFt88ffVIsXaLjvFIfWUHld2v858RuBypZ5Bvm585X8',   // Pega aquí la URL del flujo CM-Enviar
+  URL_LOGIN:   '',   // Pega aquí la URL del flujo CM-Login
+  URL_GUARDAR: '',   // Pega aquí la URL del flujo CM-Guardar
+  URL_ENVIAR:  '',   // Pega aquí la URL del flujo CM-Enviar
 
   // Cómo se escribe "Incremento %" en el Excel:
   //  'fraccion' -> 5% se guarda como 0.05 (recomendado, formato % de Excel)
@@ -563,7 +563,7 @@ function renderContent(){
 function tplGuia(){
   return '<section class="guide">'+
     '<div class="card bases"><h2>'+icon('alert')+' Bases</h2>'+
-      '<p>Recuerda que un incremento extraordinario se otorga única y exclusivamente para los colaboradores con mayor desempeño, más responsables y que representan los valores de la Cámara. Si otorgas un incremento extraordinario a alguien que no cumplió con lo anterior, estaremos reforzando comportamientos no deseados en la organización.</p>'+
+      '<p>Recuerda que un incremento extraordinario se otorga única y exclusivamente para los colaboradores con desempeño excepcional y que representan los valores de la Cámara. Si otorgas un incremento extraordinario a alguien que no cumplió con lo anterior, estaremos reforzando comportamientos no deseados en la organización.</p>'+
       '<p>Esta calculadora está calibrada para respetar la equidad interna entre colaboradores; por tal razón es importante lo siguiente:</p>'+
       '<ul><li>Tope máximo de incremento extraordinario: <b>10%</b></li>'+
       '<li>Topes de acuerdo al posicionamiento en su banda salarial: <b>3%, 5%, 7% o 10%</b></li>'+
@@ -571,7 +571,8 @@ function tplGuia(){
     '<div class="card"><h2>'+icon('sliders')+' Instrucciones</h2>'+
       '<p>En la matriz de abajo podrás ver a todos los colaboradores de tu dirección, su desempeño individual 2025 y su salario actual. Después tendrás un espacio para capturar el porcentaje (%) de incremento salarial que deseas otorgar, y la herramienta simulará el incremento y calculará el costo total.</p>'+
       '<p>En la parte superior puedes ver la bolsa total asignada para realizar el incremento extraordinario; la calculadora sumará en tiempo real el costo de tu propuesta. Recuerda que cada incremento extraordinario debe justificarse: no olvides capturar los motivos.</p>'+
-      '<p>Una vez que termines, en la parte inferior podrás <b>“Confirmar y enviar propuesta a RH”</b>.</p></div>'+
+      '<p>Una vez que termines, en la parte inferior podrás <b>“Confirmar y enviar propuesta a RH”</b>.</p>'+
+      '<p>El área de Recursos Humanos te dará el visto bueno una vez revisada tu propuesta; <b>espera instrucciones de RH antes de notificar a tu equipo</b>.</p></div>'+
   '</section>';
 }
 function perfColor(p){ return p>=90?'var(--success)':(p>=75?'var(--primary)':'var(--warning)'); }
@@ -624,7 +625,7 @@ function tplIncremento(){
 
   return ''+
   '<div class="pagehead"><div><p class="eyebrow">Módulo · Incremento Extraordinario</p><h1>'+esc(dirNombre||'Sin dirección')+'</h1>'+
-    '<p>'+(d.titular?'Titular: '+esc(d.titular)+' · ':'')+'Captura el % de incremento en pasos de 0.1. Cada colaborador tiene un máximo permitido.</p></div>'+
+    (d.titular?'<p>Titular: '+esc(d.titular)+'</p>':'')+'</div>'+
     '<button type="button" class="btn btn-ghost btn-sm" id="btn-refresh">'+icon('sync')+' Actualizar datos</button></div>'+
   tplGuia()+ selector + banner +
   '<div id="bolsa-banner"></div>'+
